@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name= "viewport" content="width=device-width, initial-scale=1.0" />
+    <title>גַּן הַשֶּׁפַע - מִשְׂחַק הַכֶּפֶל</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>גַּן הַשֶּׁפַע - מִשְׂחַק הַכֶּפֶל</h1>
+    <div class="gameDisplay">
+      <div id="scoreDisplay">צִיּוּן: 0</div>
+      <div id="roundDisplay">סִבּוּב 1 מִתּוֹךְ 5</div>
+      <div>
+        <label for="difficulty">רָמַת קוֹשִׁי</label>
+        <select id="difficulty" onchange="setDifficulty()">
+          <option value="easy">קַל</option>
+          <option value="medium">בֵּינוֹנִי</option>
+          <option value="hard">קָשֶׁה</option>
+        </select>
+      </div>
+    </div>
+    <div class="gameDisplay">
+      <button id="startButton" onclick="startGame()">הִתְחִילוּ לִשְׁתֹּל אֶת הַפְּרָחִים</button>
+      <button onclick="harvest()" id="harvestBtn" style="display: none">
+        אֶפְשָׁר לִקְטֹף אֶת הַפְּרָחִים
+      </button>
+      <div id="result"></div>
+      </div>
+    </div>
+    <div class="gameDisplay">
+      <div id="quizArea" style="display: none">
+        <p id="quizQuestion"></p>
+        <input type="text" id="quizAnswer" placeholder="כָּאן כּוֹתְבִים אֶת הַתְּשׁוּבָה">
+        <button onclick="checkAnswer()">בִּדְקוּ אֶת הַתְּשׁוּבָה</button>
+        <div id="timer"></div>
+      </div>
+    </div>
+    <div id="gameArea" style="display: none">
+      <div id="garden"></div>
+    </div>
+  </body>
+</html>
