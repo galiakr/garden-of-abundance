@@ -8,6 +8,7 @@ let timerInterval;
 let score = 0;
 let round = 1;
 let maxRounds = 5;
+let correctAnswer;
 
 function setDifficulty() {
   difficulty = document.getElementById('difficulty').value;
@@ -145,7 +146,7 @@ function plantOne() {
 function harvest() {
   document.getElementById(
     'result'
-  ).textContent = `נֶהְדָּר! נִשְׁתְּלוּ ${totalRows} שׁוּרוֹת עִם ${plantsPerRow} צְמָחִים בְּכָל שׁוּרָה.`;
+  ).textContent = `נֶהְדָּר! נִשְׁתְּלוּ ${totalRows} שׁוּרוֹת עִם ${plantsPerRow} פְּרָחִים בְּכָל שׁוּרָה.`;
   document.getElementById('quizArea').style.display = 'flex';
   document.getElementById('quizAnswer').focus();
   document.getElementById('harvestBtn').style.display = 'none';
@@ -155,50 +156,48 @@ function harvest() {
 }
 
 function askQuestion() {
-  let question, answer;
+  let question;
   switch (difficulty) {
     case 'easy':
       question = `כַּמָּה פְּרָחִים יֵשׁ בְּסַךְ הַכֹּל?`;
-      answer = totalRows * plantsPerRow;
+      correctAnswer = totalRows * plantsPerRow;
       break;
     case 'medium':
       if (Math.random() < 0.5) {
         question = `כַּמָּה פְּרָחִים יֵשׁ בְּסַךְ הַכֹּל?`;
-        answer = totalRows * plantsPerRow;
+        correctAnswer = totalRows * plantsPerRow;
       } else {
         question = `אִם יֵשׁ ${
           totalRows * plantsPerRow
         } פְּרָחִים בְּסַךְ הַכֹּל, כַּמָּה פְּרָחִים בְּכָל שׁוּרָה?`;
-        answer = plantsPerRow;
+        correctAnswer = plantsPerRow;
       }
       break;
     case 'hard':
       const randomOperation = Math.random();
       if (randomOperation < 0.33) {
         question = `כַּמָּה פְּרָחִים יֵשׁ בְּסַךְ הַכֹּל?`;
-        answer = totalRows * plantsPerRow;
+        correctAnswer = totalRows * plantsPerRow;
       } else if (randomOperation < 0.66) {
         question = `אִם יֵשׁ ${
           totalRows * plantsPerRow
         } פְּרָחִים בְּסַךְ הַכֹּל, כַּמָּה פְּרָחִים בְּכָל שׁוּרָה?`;
-        answer = plantsPerRow;
+        correctAnswer = plantsPerRow;
       } else {
         question = `אִם בְּכָל שׁוּרָה יֵשׁ ${plantsPerRow} פְּרָחִים, וְסַךְ הַכֹּל יֵשׁ ${
           totalRows * plantsPerRow
         } פְּרָחִים, כַּמָּה שׁוּרוֹת יֵשׁ?`;
-        answer = totalRows;
+        correctAnswer = totalRows;
       }
       break;
   }
   document.getElementById('quizQuestion').textContent = question;
-  return answer;
 }
 
 // לַשָּׁלָב הַבָּא
 function checkAnswer() {
   clearInterval(timerInterval);
   const userAnswer = parseInt(document.getElementById('quizAnswer').value);
-  const correctAnswer = askQuestion();
   let pointsEarned = 0;
 
   if (userAnswer === correctAnswer) {
